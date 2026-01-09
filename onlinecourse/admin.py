@@ -19,7 +19,7 @@ class LessonInline(admin.StackedInline):
 
 
 class QuestionAdmin(admin.ModelAdmin):
-    inlines = [QuestionInline]
+    inlines = [ChoiceInline]
     list_display = ['question']
 
 
