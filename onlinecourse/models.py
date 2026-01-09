@@ -108,7 +108,7 @@ class Enrollment(models.Model):
 class Question(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     content = models.CharField(max_length=300)
-    gradepoint = models.IntegerField(default=100)
+    grade = models.IntegerField(default=100)
 
 
     # method to calculate if the learner gets the score of the question
