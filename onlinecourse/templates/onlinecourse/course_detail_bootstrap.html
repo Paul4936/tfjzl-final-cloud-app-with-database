@@ -51,12 +51,35 @@
                 {% endfor %}
             </div>
             <!-- Course detail template changes go here -->
-            {% if user.is_aunthenticated %}
+            {% if user.is_authenticated %}
             </br>
-            <button class="btn btn-primary" data-toggle="collapse" data-target="#exam">Start the Exam </button>
-            <div id="#exam" class="collapse">
+            <button class="btn btn-primary btn-block" data-toggle="collapse" data-target="#exam">Start the Exam </button>
+            <div id="exam" class="collapse">
                 <form id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="POST">
                     
+          
+                    {% csrf_token %}
+                    {% for question in course.question_set.all %}
+                        
+                        <b>{{ question.text }}</b>
+                        </br>
+                        {% for choice in question.choice_set.all %}
+                            </br>
+                             
+                             <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="choice_{{ choice.IDENTIFIER }}  id="{{choice.IDENTIFIER}}"
+                                value="{{choice.IDENTIFIER}}">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{ choice.text }}
+                                </label>
+                              </div>
+                             
+                        {% endfor %}
+                        <button class="btn btn-success btn-block" type="submit" >Submit </button>
+
+
+                    {% endfor %}
+
             </div>
             
             {% endif %}
