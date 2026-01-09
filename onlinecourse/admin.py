@@ -20,7 +20,7 @@ class LessonInline(admin.StackedInline):
 
 class QuestionAdmin(admin.ModelAdmin):
     inlines = [ChoiceInline]
-    list_display = ['question']
+    list_display = ['text']
 
 
 # Register your models here.
