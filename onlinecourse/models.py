@@ -10,6 +10,7 @@ from django.conf import settings
 import uuid
 
 
+
 # Instructor model
 class Instructor(models.Model):
     user = models.ForeignKey(
@@ -101,3 +102,37 @@ class Enrollment(models.Model):
 #class Submission(models.Model):
 #    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
 #    choices = models.ManyToManyField(Choice)
+
+#question m
+
+class Question(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    question = models.CharField(max_length=300)
+    gradepoint = models.IntegerField(default=100)
+
+
+    # method to calculate if the learner gets the score of the question
+    def is_get_score(self, selected_ids):
+        all_answers = self.choice_set.filter(is_correct=True).count()
+        selected_correct = self.choice_set.filter(is_correct=True, id__in=selected_ids).count()
+        if all_answers == selected_correct:
+            return True
+        else:
+            return False
+
+
+    def __str__(self):
+        return "Question: " + self.question
+        
+        
+
+class Choice(models.Model):
+    question =  models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice = models.CharField(max_length=300)
+    is_correct = models.BooleanField(default=False)
+
+
+
+class Submission(models.Model):
+    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
+    choices = models.ManyToManyField(Choice)
