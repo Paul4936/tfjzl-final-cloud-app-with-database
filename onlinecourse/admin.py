@@ -39,7 +39,7 @@ admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Instructor)
 admin.site.register(Learner)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Choicen)
+admin.site.register(Choice)
 admin.site.register(Submission)
 
 
